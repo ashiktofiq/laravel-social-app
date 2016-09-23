@@ -9,11 +9,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      
+      @if (Auth::check())
+      <a class="navbar-brand" href="{{ action('PostController@getDashboard') }}">MYAPP</a>
+      @endif
     </div>
 <ul class="nav navbar-nav navbar-right">
+  @if (Auth::check())
+        <li><a href="{{action('UserController@getAccount')}}">{{Auth::user()->first_name}}</a></li>
         <li><a href="{{action('UserController@getLogout')}}">Logout</a></li>
-        
+        @endif
       </ul>
     
   </div><!-- /.container-fluid -->

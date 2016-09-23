@@ -2,7 +2,7 @@
 @section('title','home')
 @section('content')
 @include('includes.message')
- <div class="row">
+<div class="row">
         <div class="col-md-6">
             <h3>Sign Up</h3>
             <form action="{{action('UserController@postSignUp')}}" method="post">

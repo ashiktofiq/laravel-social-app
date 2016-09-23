@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('home', function () {
     return view('welcome');
 });
 
@@ -21,3 +21,10 @@ Route::get('dashboard','PostController@getDashboard');
 Route::post('createpost','PostController@createPost');
 Route::get('delete-post/{post_id}','PostController@deletePost');
 Route::get('logout','UserController@getLogout');
+Route::get('profile','UserController@getAccount');
+Route::post('upateprofile','UserController@postSaveAccount');
+Route::get('userimage/{filename}','UserController@getUserImage');
+Route::post('edit', [
+    'uses' => 'PostController@postEditPost',
+    'as' => 'edit'
+]);

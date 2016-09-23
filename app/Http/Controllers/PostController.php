@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Post;
 
+use Auth;
+
 class PostController extends Controller
 {   
     public function getDashboard()
@@ -38,6 +40,20 @@ class PostController extends Controller
         }
         $post->delete();
         return redirect()->intended('dashboard')->with(['message'=>'Post Deleted Successfully']);
+    }
+    
+    public function postEditPost(Request $request)
+    {
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
+        $post = Post::find($request['postId']);
+        if (Auth::user() != $post->user) {
+            return redirect()->back();
+        }
+        $post->body = $request['body'];
+        $post->update();
+        return response()->json(['new_body' => $post->body]);
     }
     
 }
